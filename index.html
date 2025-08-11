@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="title">מדריך הזמנה – SHIPTANBUL</title>
+
+<!-- SEO / Open Graph / Twitter -->
+<meta name="description" content="מדריך ההזמנה של שלום – עם קודי קופון ליוון/ארה״ב, שלבי הזמנה ברורים, מרכז עזרה, וחנויות מומלצות.">
+<meta property="og:title" content="מדריך ההזמנה – SHIPTANBUL">
+<meta property="og:description" content="קופונים עד 20% הנחה, שלבים פשוטים, עזרה מהירה וחנויות מומלצות.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root{
+    --bg:#f2efe6; --ink:#0e0e0e; --muted:#5e5e5e;
+    --card:#ffffff; --line:#e6e2d8;
+    --blue:#1f3b5b; --blue-2:#8fb9db;
+    --accent:#f5c400; --accent-2:#ffe178;
+    --chip:#f4f1e9; --ok:#2f9e44; --warn:#b77900;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:Arial,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;max-width:1160px;margin:auto;padding:24px}
+  header{position:relative;background:linear-gradient(135deg,#fff,#f1efe7);border:1px solid var(--line);border-radius:18px;padding:22px 24px 18px;margin-bottom:16px;overflow:hidden}
+  h1{margin:0 0 6px;font-size:2rem;color:var(--blue)}
+  h2{margin:28px 0 14px;font-size:1.5rem;color:var(--blue)}
+  h3{margin:18px 0 10px;font-size:1.12rem}
+  .notice{color:var(--warn);font-weight:700}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+  nav.tools{display:flex;flex-wrap:wrap;gap:8px}
+  .btn{display:inline-block;background:var(--accent);color:#000;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:700;border:1px solid #e3c100;transition:.15s}
+  .btn:hover{background:var(--accent-2);transform:translateY(-1px)}
+  .ghost{background:#fff;border:1px solid var(--line)}
+  .lang{margin-inline-start:auto;background:#fff;border:1px solid var(--line)}
+  .lang.active{background:var(--blue-2);border-color:#7eb0d6}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .col{flex:1 1 280px}
+  .centered h2,.centered h3,.centered .promo-wrap{text-align:center}
+  .step{counter-increment:step;position:relative;padding-top:6px}
+  .step h3{padding-inline-start:32px}
+  .step h3::before{content:counter(step) ".";position:absolute;inset-inline-start:0;top:2px;color:var(--blue);font-weight:800}
+  .icon{width:16px;height:16px;position:absolute;inset-inline-start:16px;top:10px}
+  .code{font-weight:800;background:var(--chip);padding:8px 14px;border-radius:10px;cursor:pointer;user-select:none;border:1px dashed #d9d2c2;transition:all .2s;display:inline-block}
+  .code:hover{transform:scale(1.04);background:#fff}
+  .hint{border-radius:12px;padding:12px 14px;margin:10px 0;border:1px solid #d9ecfb;background:#f6fbff}
+  .warnbox{border-radius:12px;padding:12px 14px;margin:10px 0;border:1px solid #ffe9b5;background:#fff9e6}
+  /* Help center cards + modals */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .topic{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:transform .2s}
+  .topic:hover{transform:translateY(-2px)}
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-start;justify-content:center;padding:24px;z-index:50}
+  .modal[open]{display:flex}
+  .dialog{max-width:860px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+  .dialog header{display:flex;align-items:center;justify-content:space-between}
+  .close{background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 12px;cursor:pointer}
+  .close:focus-visible{outline:3px solid var(--blue-2)}
+  /* Toast */
+  .toast{position:fixed;inset-inline-end:18px;bottom:18px;background:#111;color:#fff;padding:10px 14px;border-radius:12px;opacity:0;transform:translateY(8px);transition:.25s;z-index:80}
+  .toast.show{opacity:1;transform:translateY(0)}
+  /* Promo badges */
+  .promo-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px}
+  .promo{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px dashed var(--line);border-radius:14px;padding:12px 14px}
+  .promo strong{color:var(--blue)}
+  .promo .copy{border:1px solid var(--line);background:var(--chip);border-radius:10px;padding:6px 10px;cursor:pointer}
+  .promo .copy:focus-visible{outline:3px solid var(--blue-2)}
+  /* Stores */
+  .stores{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .store{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .store .hero{height:140px;background:linear-gradient(135deg,#f7f5ef,#e8f2fb)}
+  .store .meta{padding:12px 14px;display:flex;align-items:center;justify-content:space-between}
+  .store h4{margin:0;font-size:1rem;color:var(--blue)}
+  .store a{font-weight:700;text-decoration:none}
+  /* Floating windows / illustration */
+  .float-zone{position:relative}
+  .float-card{position:absolute;width:220px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
+  .float-card small{color:var(--muted)}
+  .float-1{top:-8px;inset-inline-end:-240px}
+  .float-2{bottom:-10px;inset-inline-start:-240px}
+  @media(max-width:1200px){.float-card{display:none}}
+  /* Mascot (Shalom) */
+  .mascot{position:absolute;inset-inline-start:12px;bottom:-6px;width:120px;height:auto;opacity:.95}
+  /* WhatsApp FAB */
+  .fab-wa{position:fixed;inset-inline-start:18px;bottom:18px;z-index:60;width:56px;height:56px;border-radius:50%;background:#25D366;box-shadow:0 6px 16px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;text-decoration:none}
+  .fab-wa:hover{filter:brightness(1.05)}
+  .fab-wa svg{width:28px;height:28px;fill:#fff}
+  .disclaimer{font-size:.95rem;color:var(--muted)}
+</style>
+</head>
+<body class="centered">
+
+<header class="float-zone" aria-label="Hero">
+  <h1 data-i18n="heroTitle">מדריך ההזמנה – עם קודי קופון והמלצות של שלום</h1>
+  <p class="notice" data-i18n="heroNotice">שימו לב: זהו מדריך אישי + קופונים והמלצות בלבד – אינו האתר הרשמי של חברת השילוח.</p>
+
+  <!-- Floating windows like the examples -->
+  <div class="float-card float-1" aria-label="Why online">
+    <strong data-i18n="whyBoxTitle">למה לקנות אונליין?</strong>
+    <ul style="margin:6px 0 0 0;padding-inline-start:18px">
+      <li data-i18n="why1">מחירים טובים יותר</li>
+      <li data-i18n="why2">מותגים שלא מגיעים לארץ</li>
+      <li data-i18n="why3">שילוח מהיר ושקוף</li>
+    </ul>
+    <small data-i18n="whyNote">* בהתאם למדיניות המותג והמחסן</small>
+  </div>
+  <div class="float-card float-2" aria-label="Deal">
+    <div style="font-weight:800;color:var(--blue)"><span data-i18n="dealNow">מבצע קיץ</span> — ZARA GR</div>
+    <div style="margin-top:6px"><span class="code" onclick="copyCode('SHALOMGR')">SHALOMGR</span> <small data-i18n="dealCopy">העתקה בלחיצה</small></div>
+  </div>
+
+  <!-- Mascot SVG -->
+  <svg class="mascot" viewBox="0 0 120 160" aria-hidden="true">
+    <circle cx="60" cy="36" r="18" fill="#ffe178" stroke="#1f3b5b" />
+    <rect x="30" y="58" width="60" height="70" rx="12" fill="#8fb9db" stroke="#1f3b5b"/>
+    <text x="60" y="96" text-anchor="middle" font-size="8" fill="#0e0e0e" font-weight="700">המדריך לקנייה</text>
+    <text x="60" y="108" text-anchor="middle" font-size="8" fill="#0e0e0e" font-weight="700">חכמה</text>
+    <path d="M45 62 q15 8 30 0" fill="none" stroke="#1f3b5b"/>
+    <circle cx="54" cy="34" r="2" fill="#0e0e0e"/><circle cx="66" cy="34" r="2" fill="#0e0e0e"/>
+    <path d="M54 41 q6 5 12 0" stroke="#0e0e0e" fill="none"/>
+  </svg>
+</header>
+
+<nav class="tools card" aria-label="ניווט מהיר">
+  <a class="btn" href="#steps" data-i18n="navSteps">שלבים להזמנה</a>
+  <a class="btn" href="#coupons" data-i18n="navCoupons">קופונים</a>
+  <a class="btn" href="#stores-gr" data-i18n="navGR">חנויות ביוון</a>
+  <a class="btn" href="#stores-us" data-i18n="navUS">חנויות בארה״ב</a>
+  <a class="btn" href="#help" data-i18n="navHelp">מרכז עזרה</a>
+  <a class="btn" href="#faq" data-i18n="navFAQ">שאלות נפוצות</a>
+  <a class="btn" href="#contact" data-i18n="navContact">צור קשר</a>
+
+  <button class="btn lang active" id="lang-he" onclick="setLang('he')" aria-pressed="true" aria-label="Switch to Hebrew">HE</button>
+  <button class="btn lang" id="lang-en" onclick="setLang('en')" aria-pressed="false" aria-label="Switch to English">EN</button>
+  <button class="btn lang" id="lang-fr" onclick="setLang('fr')" aria-pressed="false" aria-label="Basculer en français">FR</button>
+</nav>
+
+<section id="steps" class="card" aria-labelledby="steps-h">
+  <h2 id="steps-h" data-i18n="stepsTitle">שלבים לביצוע ההזמנה</h2>
+  <div class="row">
+    <div class="col step">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 4v6c0 5-3.5 9.5-7 10-3.5-.5-7-5-7-10V6l7-4z"/></svg>
+      <h3 data-i18n="step1Title">הרשמה באתר של <a href="https://shiptanbul.com/?ref=Shalomathlan" target="_blank" rel="noopener">SHIPTANBUL</a></h3>
+      <p data-i18n="step1Text">היכנסו לאתר והקליקו על "התחילו כאן". מלאו את הפרטים באנגלית: שם פרטי ומשפחה, אימייל, טלפון נייד, וסיסמה. לאחר מכן הזינו את הכתובת שלכם בישראל, סמנו תנאי שימוש, וקבלו מייל עם קוד אימות.</p>
+    </div>
+    <div class="col step">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 4-9 4-9-4 9-4zM12 10l9 4-9 4-9-4 9-4z"/></svg>
+      <h3 data-i18n="step2Title">קבלת הכתובת בחו״ל</h3>
+      <p data-i18n="step2Text">בחשבון יופיעו: טלפון יווני/אמריקאי, עיר/מחוז/שכונה, מיקוד וכתובת מלאה. ה-TROY NUMBER מופיע בסוף הכתובת—מעתיקים אותו במדויק ל-Address Line 2.</p>
+      <div class="hint" data-i18n="tipSaveAddr">טיפ: אפשר לשמור את הכתובת בשם “מחסן משלוחים”.</div>
+    </div>
+    <div class="col step">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM7 9h10v2H7zM7 12h7v2H7z"/></svg>
+      <h3 data-i18n="step3Title">פתיחת חשבון באתר הזר</h3>
+      <p data-i18n="step3Text">ודאו שאתם באתר המדינה הזרה (לא הישראלי). פותחים חשבון עם הכתובת שקיבלתם, האימייל והטלפון שלכם.</p>
+    </div>
+    <div class="col step">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6H4v12h16zM6 8h12v2H6zm0 4h12v2H6zm0 4h8v2H6z"/></svg>
+      <h3 data-i18n="step4Title">ביצוע ההזמנה</h3>
+      <p data-i18n="step4Text">בצ׳קאאוט הזינו את הכתובת הזרה והטלפון הזר. בשדה <strong>Address Line 2</strong> הוסיפו את <strong>TROY NUMBER</strong> (הטלפון שמופיע אצלכם ב-SHIPTANBUL).</p>
+      <div class="warnbox" role="note" aria-label="בדיקה אחרונה">
+        <strong data-i18n="precheckTitle">בדיקה אחרונה לפני תשלום</strong>
+        <ul>
+          <li data-i18n="precheckName"><strong>שם מקבל</strong>: כפי שכתוב בחשבון</li>
+          <li data-i18n="precheckPhone"><strong>טלפון</strong>: המספר הזר שסופק</li>
+          <li data-i18n="precheckAddr2"><strong>Address Line 2</strong>: כולל TROY NUMBER</li>
+        </ul>
+        <div class="disclaimer" data-i18n="precheckExample">דוגמה: רכישה ב-ZARA.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="coupons" class="card" aria-labelledby="coupon-h">
+  <h2 id="coupon-h" data-i18n="couponTitle">קודי קופון להנחה</h2>
+  <p data-i18n="couponIntro">לחצו על הקוד להעתקה מיידית. מזינים את הקוד בשלב התשלום מהמחסן לישראל – ומקבלים עד 20% הנחה על עמלת העסקה.</p>
+  <div class="promo-wrap" aria-label="מבצעים">
+    <div class="promo"><div><strong>ZARA GR</strong> — 70% פשתן</div><button class="copy" data-copy="SHALOMGR" data-i18n="copyBtn">העתק קופון</button></div>
+    <div class="promo"><div><strong>USA Summer</strong> — משלוח מוזל</div><button class="copy" data-copy="SHALOMUS" data-i18n="copyBtn">העתק קופון</button></div>
+    <div class="promo"><div><strong data-i18n="bundleSmart">איחוד חבילות חכם</strong></div><a class="copy" href="#help" data-i18n="learnMore">לפרטים</a></div>
+  </div>
+  <ul>
+    <li data-i18n="couponUS">לארה״ב – <span class="code" onclick="copyCode('SHALOMUS')">SHALOMUS</span> <span style="color:var(--ok)">(20% הנחה)</span></li>
+    <li data-i18n="couponGR">ליוון – <span class="code" onclick="copyCode('SHALOMGR')">SHALOMGR</span> <span style="color:var(--ok)">(15% הנחה)</span></li>
+  </ul>
+</section>
+
+<!-- Recommended stores: GREECE -->
+<section id="stores-gr" class="card" aria-labelledby="gr-h">
+  <h2 id="gr-h" data-i18n="grTitle">חנויות מומלצות ביוון</h2>
+  <div class="stores">
+    <!-- Each store: replace href with real links אם תרצה -->
+    <article class="store">
+      <div class="hero" aria-hidden="true"></div>
+      <div class="meta"><h4>ZARA (GR)</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div>
+    </article>
+    <article class="store">
+      <div class="hero"></div>
+      <div class="meta"><h4>MANGO (GR)</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div>
+    </article>
+    <article class="store">
+      <div class="hero"></div>
+      <div class="meta"><h4>H&amp;M (GR)</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div>
+    </article>
+    <article class="store">
+      <div class="hero"></div>
+      <div class="meta"><h4>Bershka (GR)</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div>
+    </article>
+    <article class="store">
+      <div class="hero"></div>
+      <div class="meta"><h4>Pull&amp;Bear (GR)</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div>
+    </article>
+    <article class="store">
+      <div class="hero"></div>
+      <div class="meta"><h4>Massimo Dutti (GR)</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div>
+    </article>
+  </div>
+</section>
+
+<!-- Recommended stores: USA -->
+<section id="stores-us" class="card" aria-labelledby="us-h">
+  <h2 id="us-h" data-i18n="usTitle">חנויות מומלצות בארה״ב</h2>
+  <div class="stores">
+    <article class="store"><div class="hero"></div><div class="meta"><h4>UNIQLO (US)</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div></article>
+    <article class="store"><div class="hero"></div><div class="meta"><h4>Forever 21</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div></article>
+    <article class="store"><div class="hero"></div><div class="meta"><h4>Old Navy</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div></article>
+    <article class="store"><div class="hero"></div><div class="meta"><h4>GAP</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div></article>
+    <article class="store"><div class="hero"></div><div class="meta"><h4>Banana Republic</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div></article>
+    <article class="store"><div class="hero"></div><div class="meta"><h4>Macy’s</h4><a class="btn ghost" href="#" data-i18n="visit">כניסה</a></div></article>
+  </div>
+</section>
+
+<section id="help" class="card">
+  <h2 data-i18n="helpTitle">מרכז עזרה – נושאים</h2>
+  <div class="grid" role="list">
+    <button class="topic" role="listitem" onclick="openModal('mTax')" aria-haspopup="dialog"><h4 data-i18n="topicTax">מכס ומע״מ</h4><div class="disclaimer" data-i18n="topicTaxSub">מה מחייבים ומתי</div></button>
+    <button class="topic" role="listitem" onclick="openModal('mCombine')" aria-haspopup="dialog"><h4 data-i18n="topicCombine">איחוד חבילות</h4><div class="disclaimer" data-i18n="topicCombineSub">איך ומתי משתלם</div></button>
+    <button class="topic" role="listitem" onclick="openModal('mForbidden')" aria-haspopup="dialog"><h4 data-i18n="topicForbidden">מוצרים אסורים</h4><div class="disclaimer" data-i18n="topicForbiddenSub">מה אי אפשר לשלוח</div></button>
+    <button class="topic" role="listitem" onclick="openModal('mInsurance')" aria-haspopup="dialog"><h4 data-i18n="topicInsurance">ביטוח ושבירות</h4><div class="disclaimer" data-i18n="topicInsuranceSub">כיסוי ופתיחת קריאה</div></button>
+    <button class="topic" role="listitem" onclick="openModal('mTracking')" aria-haspopup="dialog"><h4 data-i18n="topicTracking">מעקב ומשלוח</h4><div class="disclaimer" data-i18n="topicTrackingSub">עדכוני סטטוס</div></button>
+    <button class="topic" role="listitem" onclick="openModal('mAddress')" aria-haspopup="dialog"><h4 data-i18n="topicAddress">טעויות בכתובת</h4><div class="disclaimer" data-i18n="topicAddressSub">שכחתי TROY/טלפון</div></button>
+    <button class="topic" role="listitem" onclick="openModal('mReturns')" aria-haspopup="dialog"><h4 data-i18n="topicReturns">החזרות</h4><div class="disclaimer" data-i18n="topicReturnsSub">איך מחזירים לחנות</div></button>
+    <button class="topic" role="listitem" onclick="openModal('mSizing')" aria-haspopup="dialog"><h4 data-i18n="topicSizing">מידות</h4><div class="disclaimer" data-i18n="topicSizingSub">טיפים להתאמה</div></button>
+    <button class="topic" role="listitem" onclick="openModal('mVolW')" aria-haspopup="dialog"><h4 data-i18n="topicVolW">משקל נפחי</h4><div class="disclaimer" data-i18n="topicVolWSub">למה זה חשוב</div></button>
+    <button class="topic" role="listitem" onclick="openModal('mChangeIL')" aria-haspopup="dialog"><h4 data-i18n="topicChangeIL">שינוי כתובת בישראל</h4><div class="disclaimer" data-i18n="topicChangeILSub">מתי ואיך</div></button>
+  </div>
+</section>
+
+<!-- Modals (כמו קודם, ללא שינויי טקסט מהותיים) -->
+<div id="mTax" class="modal" role="dialog" aria-modal="true" aria-labelledby="mTax-h"><div class="dialog" tabindex="-1">
+  <header><h3 id="mTax-h" data-i18n="mTaxTitle">מכס ומע״מ</h3><button class="close" onclick="closeModal('mTax')" data-i18n="close">סגור</button></header>
+  <details open><summary data-i18n="mTaxQ1">מתי משלמים מס?</summary><p data-i18n="mTaxA1">לפי סוג המוצר ושוויו לפי החשבונית. שמרו קבלות והצהירו אמת למניעת עיכובים.</p></details>
+  <details><summary data-i18n="mTaxQ2">דמי משלוח נכללים בשווי?</summary><p data-i18n="mTaxA2">לעיתים כן—טוב לשמור פירוט נפרד כדי לחשב נכון.</p></details>
+</div></div>
+
+<div id="mCombine" class="modal" role="dialog" aria-modal="true" aria-labelledby="mCombine-h"><div class="dialog" tabindex="-1">
+  <header><h3 id="mCombine-h" data-i18n="mCombineTitle">איחוד חבילות</h3><button class="close" onclick="closeModal('mCombine')" data-i18n="close">סגור</button></header>
+  <details open><summary data-i18n="mCombineQ1">מתי כדאי לאחד?</summary><p data-i18n="mCombineA1">כשזה מוזיל לעומת משלוח בנפרד—בדקו משקל נפחי מול בפועל.</p></details>
+  <details><summary data-i18n="mCombineQ2">עלות וזמן אחסון</summary><p data-i18n="mCombineA2">לרוב יש עמלת איחוד וחלון אחסון מוגבל—בדקו במדיניות המחסן.</p></details>
+</div></div>
+
+<div id="mForbidden" class="modal" role="dialog" aria-modal="true" aria-labelledby="mForbidden-h"><div class="dialog" tabindex="-1">
+  <header><h3 id="mForbidden-h" data-i18n="mForbiddenTitle">מוצרים אסורים</h3><button class="close" onclick="closeModal('mForbidden')" data-i18n="close">סגור</button></header>
+  <details open><summary data-i18n="mForbiddenQ1">דוגמאות נפוצות</summary><p data-i18n="mForbiddenA1">חומרים דליקים, אירוסולים, סוללות ליתיום מסוימות, מזון מתכלה ותכשירים מסוכנים.</p></details>
+</div></div>
+
+<div id="mInsurance" class="modal" role="dialog" aria-modal="true" aria-labelledby="mInsurance-h"><div class="dialog" tabindex="-1">
+  <header><h3 id="mInsurance-h" data-i18n="mInsuranceTitle">ביטוח ושבירות</h3><button class="close" onclick="closeModal('mInsurance')" data-i18n="close">סגור</button></header>
+  <details open><summary data-i18n="mInsuranceQ1">איך מוסיפים ביטוח?</summary><p data-i18n="mInsuranceA1">בוחרים בעת פתיחת המשלוח מהמחסן. מומלץ לתעד בתמונות.</p></details>
+</div></div>
+
+<div id="mTracking" class="modal" role="dialog" aria-modal="true" aria-labelledby="mTracking-h"><div class="dialog" tabindex="-1">
+  <header><h3 id="mTracking-h" data-i18n="mTrackingTitle">מעקב ומשלוח</h3><button class="close" onclick="closeModal('mTracking')" data-i18n="close">סגור</button></header>
+  <details open><summary data-i18n="mTrackingQ1">איך מקבלים מספר מעקב?</summary><p data-i18n="mTrackingA1">יופיע אחרי פתיחת המשלוח במחסן; עוקבים באתר המשלח.</p></details>
+</div></div>
+
+<div id="mAddress" class="modal" role="dialog" aria-modal="true" aria-labelledby="mAddress-h"><div class="dialog" tabindex="-1">
+  <header><h3 id="mAddress-h" data-i18n="mAddressTitle">טעויות בכתובת</h3><button class="close" onclick="closeModal('mAddress')" data-i18n="close">סגור</button></header>
+  <details open><summary data-i18n="mAddressQ1">שכחתי TROY</summary><p data-i18n="mAddressA1">פנו למחסן עם מספר הזמנה—מוסיפים ידנית; ייתכן עיכוב.</p></details>
+</div></div>
+
+<div id="mReturns" class="modal" role="dialog" aria-modal="true" aria-labelledby="mReturns-h"><div class="dialog" tabindex="-1">
+  <header><h3 id="mReturns-h" data-i18n="mReturnsTitle">החזרות</h3><button class="close" onclick="closeModal('mReturns')" data-i18n="close">סגור</button></header>
+  <details open><summary data-i18n="mReturnsQ1">איך מחזירים?</summary><p data-i18n="mReturnsA1">שומרים אריזה, תווית החזרה ושולחים דרך המחסן.</p></details>
+</div></div>
+
+<div id="mSizing" class="modal" role="dialog" aria-modal="true" aria-labelledby="mSizing-h"><div class="dialog" tabindex="-1">
+  <header><h3 id="mSizing-h" data-i18n="mSizingTitle">בחירת מידות</h3><button class="close" onclick="closeModal('mSizing')" data-i18n="close">סגור</button></header>
+  <details open><summary data-i18n="mSizingQ1">להימנע מהחזרות</summary><p data-i18n="mSizingA1">טבלת מידות מותג, חוות דעת, השוואה לבגד דומה.</p></details>
+</div></div>
+
+<div id="mVolW" class="modal" role="dialog" aria-modal="true" aria-labelledby="mVolW-h"><div class="dialog" tabindex="-1">
+  <header><h3 id="mVolW-h" data-i18n="mVolWTitle">משקל נפחי</h3><button class="close" onclick="closeModal('mVolW')" data-i18n="close">סגור</button></header>
+  <details open><summary data-i18n="mVolWQ1">מה זה?</summary><p data-i18n="mVolWA1">חיוב לפי נפח כשחבילה גדולה אך קלה—אריזה הדוקה חוסכת כסף.</p></details>
+</div></div>
+
+<div id="mChangeIL" class="modal" role="dialog" aria-modal="true" aria-labelledby="mChangeIL-h"><div class="dialog" tabindex="-1">
+  <header><h3 id="mChangeIL-h" data-i18n="mChangeILTitle">שינוי כתובת בישראל</h3><button class="close" onclick="closeModal('mChangeIL')" data-i18n="close">סגור</button></header>
+  <details open><summary data-i18n="mChangeILQ1">מתי ואיך?</summary><p data-i18n="mChangeILA1">אפשר לעדכן לפני יציאת החבילה; אחרי—לפי מדיניות המשלח.</p></details>
+</div></div>
+
+<section id="faq" class="card">
+  <h2 data-i18n="faqTitle">שאלות נפוצות</h2>
+  <details><summary data-i18n="faq1Q">האם האתר הזה שייך ל-SHIPTANBUL?</summary><p class="disclaimer" data-i18n="faq1A">לא—זהו מדריך אישי + קופונים והמלצות של שלום.</p></details>
+  <details><summary data-i18n="faq2Q">איפה לכתוב את ה-TROY NUMBER?</summary><p data-i18n="faq2A">ב-Address Line 2; זהו מספר הטלפון באזור האישי ב-SHIPTANBUL.</p></details>
+  <details><summary data-i18n="faq3Q">מתי מזינים קוד קופון?</summary><p data-i18n="faq3A">בשלב התשלום על המשלוח מהמחסן בחו״ל לישראל.</p></details>
+</section>
+
+<section id="contact" class="card">
+  <h2 data-i18n="contactTitle">צור קשר</h2>
+  <div class="row">
+    <div class="col"><div><strong>Email</strong> — <a id="emailLink" href="mailto:shalomathlan@gmail.com">shalomathlan@gmail.com</a></div></div>
+    <div class="col"><div><strong>WhatsApp</strong> — <a id="waTel" href="tel:+972528678709">+972-52-867-8709</a></div></div>
+  </div>
+  <p class="disclaimer" data-i18n="contactNote">לכל שאלה אפשר לפנות למייל או לוואטסאפ.</p>
+</section>
+
+<footer class="disclaimer"><p>© Shalom — Guide & Coupons. Not an official SHIPTANBUL website.</p></footer>
+
+<!-- WhatsApp floating action -->
+<a id="waFab" class="fab-wa" target="_blank" aria-label="Open WhatsApp" href="#">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.1 17.6c-.3-.1-1-.5-1.1-.6-.1 0-.2-.1-.3.1-.1.1-.3.4-.4.5-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.5-.9-.8-.7-1.3-1.6-1.5-1.9-.1-.3 0-.4.1-.6.1-.1.2-.2.4-.4.1-.2.2-.3.3-.5.1-.2 0-.3-.1-.6l-.8-2c-.1-.3-.3-.4-.6-.4H11c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.8 2.7 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.1-1.3-.1-.2-.3-.2-.8-.4z"/><path d="M26.9 5.1A13.9 13.9 0 0016 .7C7.9.7 1.2 7.4 1.2 15.5c0 2.7.7 5.3 2.1 7.6l-1.4 5 5.1-1.3c2.1 1.1 4.5 1.7 7 1.7 8.1 0 14.8-6.7 14.8-14.8 0-4-1.5-7.7-4.3-10.4zM16 27.6c-2.4 0-4.8-.7-6.9-1.9l-.5-.3-3 .8.8-3-.3-.5c-1.2-2-1.9-4.4-1.9-6.9C4.2 8.6 9.8 3 16 3s11.8 5.6 11.8 12.5S22.9 27.6 16 27.6z"/></svg>
+</a>
+
+<!-- Toast -->
+<div id="toast" class="toast" role="status" aria-live="polite">הועתק</div>
+
+<!-- FAQ Schema (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"האם האתר הזה שייך ל-SHIPTANBUL?","acceptedAnswer":{"@type":"Answer","text":"לא—זהו מדריך אישי + קופונים והמלצות של שלום."}},
+    {"@type":"Question","name":"איפה לכתוב את ה-TROY NUMBER?","acceptedAnswer":{"@type":"Answer","text":"בשדה Address Line 2; זהו מספר הטלפון באזור האישי ב-SHIPTANBUL."}},
+    {"@type":"Question","name":"מתי מזינים קוד קופון?","acceptedAnswer":{"@type":"Answer","text":"בשלב התשלום על המשלוח מהמחסן בחו״ל לישראל."}}
+  ]
+}
+</script>
+
+<script>
+/* ===== Multilingual strings ===== */
+const STR = {
+  he: {
+    title:"מדריך הזמנה – SHIPTANBUL",
+    heroTitle:"מדריך ההזמנה – עם קודי קופון והמלצות של שלום",
+    heroNotice:"שימו לב: זהו מדריך אישי + קופונים והמלצות בלבד – אינו האתר הרשמי של חברת השילוח.",
+    navSteps:"שלבים להזמנה", navCoupons:"קופונים", navHelp:"מרכז עזרה", navFAQ:"שאלות נפוצות", navContact:"צור קשר",
+    navGR:"חנויות ביוון", navUS:"חנויות בארה״ב",
+    stepsTitle:"שלבים לביצוע ההזמנה",
+    step1Title:'הרשמה באתר של <a href="https://shiptanbul.com/?ref=Shalomathlan" target="_blank" rel="noopener">SHIPTANBUL</a>',
+    step1Text:'היכנסו לאתר והקליקו על "התחילו כאן". מלאו את הפרטים באנגלית: שם פרטי ומשפחה, אימייל, טלפון נייד, וסיסמה. לאחר מכן הזינו את הכתובת שלכם בישראל, סמנו תנאי שימוש, וקבלו מייל עם קוד אימות.',
+    step2Title:"קבלת הכתובת בחו״ל",
+    step2Text:"בחשבון יופיעו: טלפון יווני/אמריקאי, עיר/מחוז/שכונה, מיקוד וכתובת מלאה. ה-TROY NUMBER מופיע בסוף הכתובת—מעתיקים אותו ל-Address Line 2.",
+    tipSaveAddr:'טיפ: אפשר לשמור את הכתובת בשם “מחסן משלוחים”.',
+    step3Title:"פתיחת חשבון באתר הזר",
+    step3Text:"ודאו שאתם באתר המדינה הזרה. פותחים עם הכתובת שקיבלתם, האימייל והטלפון שלכם.",
+    step4Title:"ביצוע ההזמנה",
+    step4Text:"בצ׳קאאוט הזינו את הכתובת הזרה והטלפון הזר. ב-<strong>Address Line 2</strong> הוסיפו את <strong>TROY NUMBER</strong>.",
+    precheckTitle:"בדיקה אחרונה לפני תשלום",
+    precheckName:"שם מקבל: כפי שכתוב בחשבון",
+    precheckPhone:"טלפון: המספר הזר שסופק",
+    precheckAddr2:"Address Line 2: כולל TROY NUMBER",
+    precheckExample:"דוגמה: רכישה ב-ZARA.",
+    couponTitle:"קודי קופון להנחה",
+    couponIntro:"לחצו על הקוד להעתקה מיידית. מזינים את הקוד בשלב התשלום מהמחסן לישראל – ומקבלים עד 20% הנחה.",
+    couponUS:'לארה״ב – ', couponGR:'ליוון – ',
+    bundleSmart:"איחוד חבילות חכם",
+    helpTitle:"מרכז עזרה – נושאים",
+    topicTax:"מכס ומע״מ", topicTaxSub:"מה מחייבים ומתי",
+    topicCombine:"איחוד חבילות", topicCombineSub:"איך ומתי משתלם",
+    topicForbidden:"מוצרים אסורים", topicForbiddenSub:"מה אי אפשר לשלוח",
+    topicInsurance:"ביטוח ושבירות", topicInsuranceSub:"כיסוי ופתיחת קריאה",
+    topicTracking:"מעקב ומשלוח", topicTrackingSub:"עדכוני סטטוס",
+    topicAddress:"טעויות בכתובת", topicAddressSub:"שכחתי TROY/טלפון",
+    topicReturns:"החזרות", topicReturnsSub:"איך מחזירים לחנות",
+    topicSizing:"מידות", topicSizingSub:"טיפים להתאמה",
+    topicVolW:"משקל נפחי", topicVolWSub:"למה זה חשוב",
+    topicChangeIL:"שינוי כתובת בישראל", topicChangeILSub:"מתי ואיך",
+    faqTitle:"שאלות נפוצות",
+    faq1Q:"האם האתר הזה שייך ל-SHIPTANBUL?", faq1A:"לא—זהו מדריך אישי + קופונים והמלצות של שלום.",
+    faq2Q:"איפה לכתוב את ה-TROY NUMBER?", faq2A:"ב-Address Line 2; זהו מספר הטלפון באזור האישי ב-SHIPTANBUL.",
+    faq3Q:"מתי מזינים קוד קופון?", faq3A:"בשלב התשלום על המשלוח מהמחסן בחו״ל לישראל.",
+    contactTitle:"צור קשר", contactNote:"לכל שאלה אפשר לפנות למייל או לוואטסאפ.",
+    close:"סגור",
+    waMsg:"היי שלום אני רוצה לבצע הזמנה ויש לי שאלה",
+    copyBtn:"העתק קופון", learnMore:"לפרטים",
+    grTitle:"חנויות מומלצות ביוון", usTitle:"חנויות מומלצות בארה״ב", visit:"כניסה",
+    whyBoxTitle:"למה לקנות אונליין?", why1:"מחירים טובים יותר", why2:"מותגים שלא מגיעים לארץ", why3:"שילוח מהיר ושקוף", whyNote:"* בהתאם למדיניות", dealNow:"מבצע קיץ", dealCopy:"העתקה בלחיצה"
+  },
+  en: {
+    title:"Order Guide – SHIPTANBUL",
+    heroTitle:"Order Guide – with coupons and tips by Shalom",
+    heroNotice:"Note: personal guide + coupons. Not the official shipping website.",
+    navSteps:"Steps", navCoupons:"Coupons", navHelp:"Help Center", navFAQ:"FAQ", navContact:"Contact", navGR:"Greece stores", navUS:"USA stores",
+    stepsTitle:"Order steps",
+    step1Title:'Sign up at <a href="https://shiptanbul.com/?ref=Shalomathlan" target="_blank" rel="noopener">SHIPTANBUL</a>',
+    step1Text:'Click “Get Started”. Fill in English: first/last name, email, mobile, password. Add your Israel address, accept T&C, and verify.',
+    step2Title:"Get your foreign address",
+    step2Text:"Your account shows a local GR/US phone, city/region/neighborhood, ZIP and full address. Copy the TROY NUMBER to Address Line 2.",
+    tipSaveAddr:'Tip: save it as “Shipping Warehouse”.',
+    step3Title:"Create an account on the foreign site",
+    step3Text:"Make sure you’re on the correct country site. Use the provided address, your email and phone.",
+    step4Title:"Place the order",
+    step4Text:"At checkout, use the foreign address and phone. In <strong>Address Line 2</strong> add the <strong>TROY NUMBER</strong>.",
+    precheckTitle:"Final check before paying",
+    precheckName:"Recipient name: as in your account",
+    precheckPhone:"Phone: provided foreign number",
+    precheckAddr2:"Address Line 2: includes TROY NUMBER",
+    precheckExample:"Example: ZARA purchase.",
+    couponTitle:"Coupon codes",
+    couponIntro:"Click to copy. Apply when paying for shipping from the warehouse to Israel — up to 20% off.",
+    couponUS:"USA — ", couponGR:"Greece — ",
+    bundleSmart:"Smart parcel combine",
+    helpTitle:"Help Center – Topics",
+    topicTax:"Taxes & VAT", topicTaxSub:"When and how",
+    topicCombine:"Combine parcels", topicCombineSub:"When it’s worth it",
+    topicForbidden:"Restricted items", topicForbiddenSub:"What can’t be shipped",
+    topicInsurance:"Insurance & damage", topicInsuranceSub:"Coverage & claims",
+    topicTracking:"Tracking & delivery", topicTrackingSub:"Status updates",
+    topicAddress:"Address mistakes", topicAddressSub:"Missed TROY/phone",
+    topicReturns:"Returns", topicReturnsSub:"Back to store",
+    topicSizing:"Sizing", topicSizingSub:"Fit tips",
+    topicVolW:"Volumetric weight", topicVolWSub:"Why it matters",
+    topicChangeIL:"Change IL address", topicChangeILSub:"When & how",
+    faqTitle:"FAQ", faq1Q:"Is this the official SHIPTANBUL site?", faq1A:"No—personal guide + coupons by Shalom.",
+    faq2Q:"Where to put TROY NUMBER?", faq2A:"In Address Line 2; it’s your phone in SHIPTANBUL.",
+    faq3Q:"When to use coupon?", faq3A:"When paying for shipping from the warehouse to Israel.",
+    contactTitle:"Contact", contactNote:"Email or WhatsApp for any question.",
+    close:"Close",
+    waMsg:"Hi Shalom, I want to place an order and I have a question.",
+    copyBtn:"Copy code", learnMore:"Learn more",
+    grTitle:"Recommended stores in Greece", usTitle:"Recommended stores in USA", visit:"Visit",
+    whyBoxTitle:"Why buy online?", why1:"Better prices", why2:"Brands not sold locally", why3:"Fast, transparent shipping", whyNote:"* Subject to policy", dealNow:"Summer deal", dealCopy:"Copy with one tap"
+  },
+  fr: {
+    title:"Guide de commande – SHIPTANBUL",
+    heroTitle:"Guide de commande – avec coupons et conseils par Shalom",
+    heroNotice:"Note : guide personnel + coupons. Pas le site officiel de livraison.",
+    navSteps:"Étapes", navCoupons:"Coupons", navHelp:"Centre d’aide", navFAQ:"FAQ", navContact:"Contact", navGR:"Boutiques en Grèce", navUS:"Boutiques aux USA",
+    stepsTitle:"Étapes de commande",
+    step1Title:'Inscription sur <a href="https://shiptanbul.com/?ref=Shalomathlan" target="_blank" rel="noopener">SHIPTANBUL</a>',
+    step1Text:'Cliquez « Commencer ». Renseignez : prénom/nom, e-mail, mobile, mot de passe. Ajoutez votre adresse en Israël et validez.',
+    step2Title:"Adresse étrangère",
+    step2Text:"Votre compte affiche un téléphone local (GR/US), la ville et l’adresse complète. Copiez le TROY NUMBER dans Address Line 2.",
+    tipSaveAddr:'Astuce : enregistrez-la comme « Entrepôt d’expédition ».',
+    step3Title:"Créer un compte sur le site étranger",
+    step3Text:"Assurez-vous d’être sur le bon site pays. Utilisez l’adresse fournie, votre e-mail et votre téléphone.",
+    step4Title:"Passer la commande",
+    step4Text:"Au paiement, utilisez l’adresse et le téléphone étrangers. Dans <strong>Address Line 2</strong>, ajoutez le <strong>TROY NUMBER</strong>.",
+    precheckTitle:"Vérification avant paiement",
+    precheckName:"Nom du destinataire : comme dans le compte",
+    precheckPhone:"Téléphone : numéro étranger fourni",
+    precheckAddr2:"Address Line 2 : avec TROY NUMBER",
+    precheckExample:"Exemple : achat ZARA.",
+    couponTitle:"Codes promo",
+    couponIntro:"Cliquez pour copier. À saisir lors du paiement de l’envoi vers Israël — jusqu’à 20% de remise.",
+    couponUS:"États-Unis — ", couponGR:"Grèce — ",
+    bundleSmart:"Regroupement malin",
+    helpTitle:"Centre d’aide – Sujets",
+    topicTax:"Taxes & TVA", topicTaxSub:"Quand et comment",
+    topicCombine:"Regrouper des colis", topicCombineSub:"Quand c’est rentable",
+    topicForbidden:"Articles interdits", topicForbiddenSub:"Non expédiables",
+    topicInsurance:"Assurance & casse", topicInsuranceSub:"Couverture & réclamations",
+    topicTracking:"Suivi & livraison", topicTrackingSub:"Mises à jour",
+    topicAddress:"Erreurs d’adresse", topicAddressSub:"TROY/téléphone manquant",
+    topicReturns:"Retours", topicReturnsSub:"Renvoi à la boutique",
+    topicSizing:"Tailles", topicSizingSub:"Conseils d’ajustement",
+    topicVolW:"Poids volumétrique", topicVolWSub:"Pourquoi c’est important",
+    topicChangeIL:"Changer l’adresse en Israël", topicChangeILSub:"Quand & comment",
+    faqTitle:"FAQ", faq1Q:"Site officiel SHIPTANBUL ?", faq1A:"Non — guide personnel + coupons par Shalom.",
+    faq2Q:"Où mettre le TROY NUMBER ?", faq2A:"Dans Address Line 2 ; c’est votre téléphone dans SHIPTANBUL.",
+    faq3Q:"Quand utiliser le code promo ?", faq3A:"Au paiement de l’envoi depuis l’entrepôt vers Israël.",
+    contactTitle:"Contact", contactNote:"E-mail ou WhatsApp pour toute question.",
+    close:"Fermer",
+    waMsg:"Salut Shalom, je souhaite passer une commande et j’ai une question.",
+    copyBtn:"Copier le code", learnMore:"En savoir plus",
+    grTitle:"Boutiques recommandées en Grèce", usTitle:"Boutiques recommandées aux USA", visit:"Entrer",
+    whyBoxTitle:"Pourquoi acheter en ligne ?", why1:"Meilleurs prix", why2:"Marques non disponibles", why3:"Expédition rapide et claire", whyNote:"* Selon la politique", dealNow:"Promo d’été", dealCopy:"Copie en un clic"
+  }
+};
+
+let currentLang='he';
+const toastEl = document.getElementById('toast');
+
+/* Lang persistence + detection */
+function detectInitialLang(){
+  const saved = localStorage.getItem('shiptan_lang');
+  if(saved && STR[saved]) return saved;
+  const nav = (navigator.language||'').slice(0,2).toLowerCase();
+  if(STR[nav]) return nav;
+  return 'he';
+}
+function setLang(l, anchorAfterChange){
+  currentLang=l;
+  ['he','en','fr'].forEach(k=>{
+    const el = document.getElementById('lang-'+k);
+    if(!el) return;
+    const is = (k===l);
+    el.classList.toggle('active',is);
+    el.setAttribute('aria-pressed', String(is));
+  });
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.getAttribute('data-i18n');
+    const val=STR[l][key];
+    if(!val) return;
+    el.innerHTML = val;
+  });
+  const rtl = (l==='he');
+  document.documentElement.lang = l;
+  document.documentElement.dir = rtl ? 'rtl' : 'ltr';
+  const msg = encodeURIComponent(STR[l].waMsg);
+  document.getElementById('waFab').href = 'https://wa.me/972528678709?text='+msg;
+  document.title = STR[l].title;
+  localStorage.setItem('shiptan_lang', l);
+  if(anchorAfterChange && location.hash){
+    const id = location.hash.slice(1);
+    const target = document.getElementById(id);
+    if(target){ target.scrollIntoView({behavior:'smooth',block:'start'}); }
+  }
+}
+
+/* Toast + copy */
+let toastTimer=0;
+function showToast(text){
+  toastEl.textContent = text || (currentLang==='he' ? 'הועתק' : currentLang==='fr' ? 'Copié' : 'Copied');
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>toastEl.classList.remove('show'), 1800);
+}
+function copyCode(code){
+  navigator.clipboard.writeText(code).then(()=>showToast((currentLang==='he'?'הקוד הועתק: ':currentLang==='fr'?'Code copié: ':'Copied: ')+code));
+}
+document.addEventListener('click', (e)=>{
+  const btn = e.target.closest('[data-copy]');
+  if(!btn) return;
+  const val = btn.getAttribute('data-copy');
+  copyCode(val);
+});
+
+/* Modals: focus trap, Esc, click-out */
+const openStack = [];
+function openModal(id){
+  const m = document.getElementById(id);
+  if(!m) return;
+  m.setAttribute('open','');
+  openStack.push(m);
+  const dlg = m.querySelector('.dialog');
+  const focusables = dlg.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  (focusables[0]||dlg).focus();
+}
+function closeModal(id){
+  const m = document.getElementById(id);
+  if(!m) return;
+  m.removeAttribute('open');
+  const idx=openStack.indexOf(m);
+  if(idx>-1) openStack.splice(idx,1);
+}
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='Escape' && openStack.length){
+    const top = openStack[openStack.length-1];
+    closeModal(top.id);
+  }
+});
+document.addEventListener('click', (e)=>{
+  const m = e.target.closest('.modal');
+  if(m && e.target===m){
+    closeModal(m.id);
+  }
+});
+document.addEventListener('keydown', (e)=>{
+  if(e.key!=='Tab' || !openStack.length) return;
+  const m = openStack[openStack.length-1];
+  const dlg = m.querySelector('.dialog');
+  const focusables = dlg.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  if(!focusables.length) return;
+  const first = focusables[0], last = focusables[focusables.length-1];
+  if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
+  else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
+});
+
+/* Init */
+setLang(detectInitialLang());
+</script>
+</body>
+</html>
